@@ -1,8 +1,33 @@
 // iterators4.rs
 
-// I AM NOT DONE
+struct Factorial {
+    num: u64,
+}
+
+impl Factorial {
+    fn new(num: u64) -> Factorial {
+        Factorial { num: num }
+    }
+}
+
+impl Iterator for Factorial {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        match self.num {
+            0 => None,
+            default => {
+                let val = self.num;
+                self.num -= 1;
+                Some(val)
+            }
+        }
+    }
+}
 
 pub fn factorial(num: u64) -> u64 {
+    let fact = Factorial::new(num);
+    fact.product::<u64>()
     // Complete this function to return the factorial of num
     // Do not use:
     // - return
